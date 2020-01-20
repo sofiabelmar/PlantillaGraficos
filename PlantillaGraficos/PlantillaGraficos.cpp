@@ -37,6 +37,20 @@ int main()
 	//Establecemos la ventana como contexto
 	glfwMakeContextCurrent(window);
 
+	//Una vez establecido el contexto, se activan las funciones modernas (gpu)
+	glewExperimental = true;
+
+	//Imprimir posibles errores
+
+	GLenum errores = glewInit();
+	if (errores != GLEW_OK)
+	{
+		glewGetErrorString(errores);
+	}
+
+	const GLubyte* versionGL = glGetString(GL_VERSION);
+	cout << "Version openGL" << versionGL;
+
 	//ciclo de dibujo (Draw loop)
 
 	while (!glfwWindowShouldClose(window))
@@ -44,7 +58,7 @@ int main()
 		//establecer la región de dibujo
 		glViewport(0, 0, 800, 600);
 		//establecemos el color de borrado, valores rgba, van de 0 a 1
-		glClearColor(.3,.21,.6,1);
+		glClearColor(1,.21,.7,1);
 		//Borrar!
 		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 		
